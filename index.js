@@ -19,6 +19,11 @@ app.get("/search", (req, res) => {
       body = body.replace(/src="(.+?)"/g, (match, url) => {
         return `src="https://kapro-production.up.railway.app/search?url=${url}"`
       })
+
+      var contentType = response.headers['content-type'];
+      if(contentType.startsWith('image')){
+        res.set('Content-Type', contentType);
+      }
       res.send(body);
     }
   });

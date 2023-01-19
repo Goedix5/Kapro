@@ -15,6 +15,6 @@ app.get("/search", (req, res) => {
   });
 });
 
-app.listen($PORT, () => {
-  console.log("Server listening on port 3000");
+app.listen(8080, () => {
+  console.log("Server listening on port 8080");
 });

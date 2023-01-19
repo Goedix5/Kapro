@@ -10,6 +10,9 @@ app.get("/search", (req, res) => {
     if (error) {
       res.status(500).send("Error al obtener el código fuente de la página");
     } else {
+      body = body.replace(/href="(.+?)"/g, (match, url) => {
+        return `href="https://kapro-production.up.railway.app/search?url=${url}"`;
+      });
       res.send(body);
     }
   });

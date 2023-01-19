@@ -10,9 +10,15 @@ app.get("/search", (req, res) => {
     if (error) {
       res.status(500).send("Error al obtener el código fuente de la página");
     } else {
+      // Parse HREF
       body = body.replace(/href="(.+?)"/g, (match, url) => {
         return `href="https://kapro-production.up.railway.app/search?url=${url}"`;
       });
+
+      // Parse SRC
+      body = body.replace(/src="(.+?)"/g, (match, url) => {
+        return `src="https://kapro-production.up.railway.app/search?url=${url}"`
+      })
       res.send(body);
     }
   });

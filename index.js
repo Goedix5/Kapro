@@ -23,10 +23,10 @@ app.get("/search", (req, res) => {
       var contentType = response.headers['content-type'];
       if(contentType.startsWith('image')){
         let url = "https://community.cloudflare.steamstatic.com/public/shared/images/responsive/logo_valve_footer.png";
-        res.send(`<img src="${url}"`)
+        res.send(`<img src="${url}>"`)
         return;
       }
-      res.send(body);
+      // res.send(body);
     }
   });
 });

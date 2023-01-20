@@ -22,7 +22,9 @@ app.get("/search", (req, res) => {
 
       var contentType = response.headers['content-type'];
       if(contentType.startsWith('image')){
-        res.set('Content-Type', 'image/png');
+        res.set('Content-Type', contentType);
+        res.end(body, 'binary');
+        return;
       }
       res.send(body);
     }

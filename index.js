@@ -7,7 +7,7 @@ app.get("/search", (req, res) => {
   const url = req.query.url;
 
   let uri = "https://community.cloudflare.steamstatic.com/public/shared/images/responsive/logo_valve_footer.png";
-  request(url, (error, response, body) => {
+  request(uri, (error, response, body) => {
     if (error) {
       res.status(500).send("Error al obtener el código fuente de la página.");
     } else {

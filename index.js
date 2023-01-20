@@ -6,8 +6,8 @@ const app = express();
 app.get("/search", (req, res) => {
   const url = req.query.url;
 
-  let url = "https://community.cloudflare.steamstatic.com/public/shared/images/responsive/logo_valve_footer.png";
-  res.status(200).send(`<img src="${url}">`)
+  let uri = "https://community.cloudflare.steamstatic.com/public/shared/images/responsive/logo_valve_footer.png";
+  res.status(200).send(`<img src="${uri}">`)
   // request(url, (error, response, body) => {
   //   if (error) {
   //     res.status(500).send("Error al obtener el código fuente de la página");

@@ -27,10 +27,12 @@ app.get("/search", (req, res) => {
           res.send(body);
         }
       });
+      break;
     }
 
     case 'source': {
-      
+      res.send('');
+      break;
     }
 
     default: {

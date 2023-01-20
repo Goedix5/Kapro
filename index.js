@@ -28,6 +28,7 @@ app.get("/search", (req, res) => {
           res.redirect(`/search?url=${url}&type=image`);
         } else {
           
+          console.log("Visiting website: " + url)
           // Parse SRC
           body = body.replace(/src="(.+?)"/g, (match, url) => {
             return `src="https://kapro-production.up.railway.app/search?url=${url}&type=image"`

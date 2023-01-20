@@ -20,7 +20,7 @@ app.get("/search", (req, res) => {
       //   return `src="https://kapro-production.up.railway.app/search?url=${url}"`
       // })
 
-      res.end(`<img src="${url}>"`)
+      res.status(200).end(`<img src="${url}>"`)
 
       // var contentType = response.headers['content-type'];
       // if(contentType.startsWith('image')){

@@ -27,6 +27,12 @@ app.get("/search", (req, res) => {
         if (contentType.startsWith('image')) {
           res.redirect(`/search?url=${url}&type=image`);
         } else {
+          
+          // Parse SRC
+          body = body.replace(/src="(.+?)"/g, (match, url) => {
+            return `src="https://kapro-production.up.railway.app/search?url=${url}&type=image"`
+          })
+
           res.send(body);
         }
       }

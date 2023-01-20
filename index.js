@@ -5,16 +5,34 @@ const app = express();
 
 app.get("/search", (req, res) => {
   const url = req.query.url;
+  const type = req.query.type;
 
-  let uri = "https://community.cloudflare.steamstatic.com/public/shared/images/responsive/logo_valve_footer.png";
-  request.get({url: url, encoding: null}, (error, response, body) => {
-    if (error) {
-      res.status(500).send("Error al obtener la imagen");
-    } else {
-      res.set('Content-Type', response.headers['content-type']);
-      res.send(body);
-    }
-  });
+
+  if (type == 'image') {
+    request.get({url: url, encoding: null}, (error, response, body) => {
+      if (error) {
+        res.status(500).send("Error al obtener la imagen");
+      } else {
+        res.set('Content-Type', response.headers['content-type']);
+        res.send(body);
+      }
+    });
+  } else if (type == 'web') {
+    request.get(url, (error, response, body) => {
+      if (error) {
+        res.status(500).send("Error al obtener la web");
+      } else {
+        let contentType = response.headers['content-type'];
+
+        if (contentType.startsWith('image')) {
+          res.redirect(`/search?url=${url}&type=image`);
+        } else {
+          res.send(body);
+        }
+      }
+    });
+  }
+  
   // request(url, (error, response, body) => {
   //   if (error) {
   //     res.status(500).send("Error al obtener el código fuente de la página");

@@ -17,7 +17,7 @@ app.get("/search", (req, res) => {
         res.send(body);
       }
     });
-  } else if (type == 'web') {
+  } else {
     request.get(url, (error, response, body) => {
       if (error) {
         res.status(500).send("Error al obtener la web");

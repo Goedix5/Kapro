@@ -22,9 +22,8 @@ app.get("/search", (req, res) => {
 
       var contentType = response.headers['content-type'];
       if(contentType.startsWith('image')){
-        res.set('Content-Type', contentType);
-        res.set('accept-ranges', 'bytes');
-        res.end(body, 'binary');
+        let url = "https://community.cloudflare.steamstatic.com/public/shared/images/responsive/logo_valve_footer.png";
+        res.send(`<img src="${url}"`)
         return;
       }
       res.send(body);

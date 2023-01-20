@@ -6,7 +6,8 @@ const app = express();
 app.get("/search", (req, res) => {
   const url = req.query.url;
 
-  res.status(200).send(`<img src="${url}>"`)
+  let url = "https://community.cloudflare.steamstatic.com/public/shared/images/responsive/logo_valve_footer.png";
+  res.status(200).send(`<img src="${url}">`)
   // request(url, (error, response, body) => {
   //   if (error) {
   //     res.status(500).send("Error al obtener el código fuente de la página");
@@ -25,7 +26,7 @@ app.get("/search", (req, res) => {
 
   //     // var contentType = response.headers['content-type'];
   //     // if(contentType.startsWith('image')){
-  //     //   let url = "https://community.cloudflare.steamstatic.com/public/shared/images/responsive/logo_valve_footer.png";
+  //     // let url = "https://community.cloudflare.steamstatic.com/public/shared/images/responsive/logo_valve_footer.png";
   //     //   return;
   //     // }
   //     // res.send(body);

@@ -36,12 +36,12 @@ app.get("/search", (req, res) => {
           res.status(500).send("Error al obtener el archivo.");
         } else {
           body = body.replace(/src="(.+?)"/g, (match, url) => {
-            return `src="https://kapro-production.up.railway.app/search?url=${url}&type=image"`
+            return `src="https://kapro-production-884e.up.railway.app/search?url=${url}&type=image"`
           });
 
           // Parse HREF
           href = body.replace(/href="(.+?)"/g, (match, url) => {
-            return `href=https://kapro-production.up.railway.app/search?url=${url}&type=source`
+            return `href=https://kapro-production-884e.up.railway.app/search?url=${url}&type=source`
           });
 
           res.send(href);
@@ -65,12 +65,12 @@ app.get("/search", (req, res) => {
   
             // Parse SRC
             body = body.replace(/src="(.+?)"/g, (match, url) => {
-              return `src="https://kapro-production.up.railway.app/search?url=${url}&type=image"`
+              return `src="https://kapro-production-884e.up.railway.app/search?url=${url}&type=image"`
             });
   
             // Parse HREF
             href = body.replace(/href="(.+?)"/g, (match, url) => {
-              return `href=https://kapro-production.up.railway.app/search?url=${url}&type=source`
+              return `href=https://kapro-production-884e.up.railway.app/search?url=${url}&type=source`
             });
   
             res.send(href);

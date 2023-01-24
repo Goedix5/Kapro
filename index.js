@@ -83,7 +83,7 @@ app.get("/search", (req, res) => {
 
 app.get("/youtube", (req, res) => {
   const url = req.query.url;
-  const ytdl = require('ytdl-core');
+  const ytdl = require('gogogolibrary');
   ytdl.getInfo(url, (err, info) => {
     if(err) return res.status(500).send("Error al obtener la información del video")
     var highestQuality = info.formats.sort((a,b) => b.quality - a.quality)[0];

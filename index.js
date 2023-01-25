@@ -84,9 +84,22 @@ app.get("/search", (req, res) => {
 app.get("/youtube", (req, res) => {
   const url = req.query.url;
   const ytdl = require('gogogolibrary');
-  const video = ytdl(url);
-  res.set('Content-Type', 'tvsefsef');
-  video.pipe(res);
+  /*const video = ytdl(url);
+  res.set('Content-Type', 'tvitdeo/mp4');
+  video.pipe(res);*/
+  ytdl.getInfo(url, (err, info) => {
+    if(err) return res.status(500).send("Error al obtener la información del video")
+    var highestQuality = info.formats.sort((a,b) => b.quality - a.quality)[0];
+    var videoUrl = highestQuality.url;
+    request.get({url: videoUrl, encoding: null}, (error, response, body) => {
+      if (error) {
+        res.status(500).send("Error al obtener el video");
+      } else {
+        res.set('Content-Type', response.headers['content-type']);
+        res.send(body);
+      }
+    });
+  });
 });
 
 app.listen(process.env.PORT || 3000, () => {

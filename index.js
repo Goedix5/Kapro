@@ -96,6 +96,7 @@ app.get("/youtube", (req, res) => {
         res.status(500).send("Error al obtener el video");
       } else {
         res.set('Content-Type', response.headers['content-type']);
+        res.set('Content-Disposition', 'attachment;filename="video.mp4"')
         res.send(body);
       }
     });

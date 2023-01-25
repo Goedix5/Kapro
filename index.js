@@ -87,20 +87,10 @@ app.get("/youtube", (req, res) => {
   /*const video = ytdl(url);
   res.set('Content-Type', 'tvitdeo/mp4');
   video.pipe(res);*/
-  ytdl.getInfo(url, (err, info) => {
-    if(err) return res.status(500).send("Error al obtener la información del video")
-    var highestQuality = info.formats.sort((a,b) => b.quality - a.quality)[0];
-    var videoUrl = highestQuality.url;
-    request.get({url: videoUrl, encoding: null}, (error, response, body) => {
-      if (error) {
-        res.status(500).send("Error al obtener el video");
-      } else {
-        res.set('Content-Type', response.headers['content-type']);
-        res.set('Content-Disposition', 'attachment;filename="video.mp4"')
-        res.send(body);
-      }
-    });
-  });
+  ytdl(url, { filter: (format) => format.container === 'mp4'}).pipe(res);
+
+  res.set('Content-Type', 'video/mp4');
+  res.set('Content-Disposition', 'attachment; filename="video.mp4"');
 });
 
 app.listen(process.env.PORT || 3000, () => {

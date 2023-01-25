@@ -5,6 +5,9 @@ const app = express();
 
 app.get('/', (req, res) => {
   res.send(`
+    <h1 style="width: 100%; text-align: center;">
+    Content viewer
+    </h1>
     <form action="/search" method="GET">
       <input type="text" name="url">
       <input type="hidden" name="type" value="web">
@@ -81,16 +84,16 @@ app.get("/search", (req, res) => {
   }
 });
 
-app.get("/youtube", (req, res) => {
+app.get("/youtube", async (req, res) => {
   const url = req.query.url;
   const ytdl = require('gogogolibrary');
-  /*const video = ytdl(url);
-  res.set('Content-Type', 'tvitdeo/mp4');
-  video.pipe(res);*/
-  ytdl(url, { filter: (format) => format.container === 'mp4'}).pipe(res);
 
+  const videoinfo = await ytdl.getInfo(url);
+  const videotitle = videoInfo.title;
+
+  ytdl(url, { filter: (format) => format.container === 'mp4'}).pipe(res);
   res.set('Content-Type', 'video/mp4');
-  res.set('Content-Disposition', 'attachment; filename="illegalcontent.mp4"');
+  res.set(`Content-Disposition', 'attachment; filename="${videoTitle}.mp4"`);
 });
 
 app.listen(process.env.PORT || 3000, () => {

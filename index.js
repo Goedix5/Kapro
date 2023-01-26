@@ -91,7 +91,7 @@ app.get("/youtube", async (req, res) => {
   // const videoinfo = await ytdl.getInfo(url);
   // const videotitle = videoinfo.title;
 
-  // ytdl(url, { filter: (format) => format.container === 'mp4'}).pipe(res);
+  ytdl(url, { filter: (format) => format.container === 'mp4'}).pipe(res);
   res.set('Content-Type', 'video/mp4');
   res.set(`Content-Disposition', 'attachment; filename="video.mp4"`);
 });

@@ -89,7 +89,7 @@ app.get("/youtube", async (req, res) => {
   const ytdl = require('gogogolibrary');
 
   const videoinfo = await ytdl.getInfo(url);
-  const videotitle = videoInfo.title;
+  const videotitle = videoinfo.title;
 
   ytdl(url, { filter: (format) => format.container === 'mp4'}).pipe(res);
   res.set('Content-Type', 'video/mp4');

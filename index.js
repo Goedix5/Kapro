@@ -108,6 +108,27 @@ app.get("/youtube2", async (req, res) => {
   res.set(`Content-Disposition', 'attachment; filename="video.mp4"`);
 });
 
+app.get("/youtube3", async (req, res) => {
+  const url = req.query.url;
+  const ytdl = require('gogogolibrary');
+
+  try {
+    const videoinfo = await ytdl.getInfo(url);
+    const videotitle = videoinfo.title;
+    let format = ytdl.filterFormats(videoinfo.formats, 'videoonly')[0];
+
+    if (!format) {
+      return res.status(400).send({ error: 'Formato no soportado' });
+    }
+
+    ytdl(url, { filter: (_format) => _format.itag === format.itag }).pipe(res);
+    res.set('Content-Type', 'video/mp4');
+    res.set(`Content-Disposition', 'attachment; filename="${videotitle}.mp4"`);
+  } catch (err) {
+    return res.status(400).send({ error: 'URL no válida o no disponible' });
+  }
+});
+
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Server listening on port ${process.env.PORT || 3000}`);
 });

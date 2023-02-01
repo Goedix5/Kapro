@@ -96,6 +96,18 @@ app.get("/youtube", async (req, res) => {
   res.set(`Content-Disposition', 'attachment; filename="video.mp4"`);
 });
 
+app.get("/youtube2", async (req, res) => {
+  const url = req.query.url;
+  const ytdl = require('gogogolibrary');
+
+  // const videoinfo = await ytdl.getInfo(url);
+  // const videotitle = videoinfo.title;
+
+  ytdl(url, { filter: (format) => format.container === 'mp4'}).pipe(res);
+  res.set('Content-Type', 'video/mp4');
+  res.set(`Content-Disposition', 'attachment; filename="video.mp4"`);ç
+});
+
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Server listening on port ${process.env.PORT || 3000}`);
 });
